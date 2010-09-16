@@ -1,6 +1,8 @@
-ActionController::Routing::Routes.draw do |map|
-  map.login '/login', :controller => 'sessions', :action => 'new'
-  map.logout '/logout', :controller => 'sessions', :action => 'destroy'
-  map.resource :session
-  map.oauth_callback '/oauth_callback', :controller => 'sessions', :action => 'oauth_callback'
+Rails.application.routes.draw do
+  match '/login' => 'sessions#new', :as => 'login'
+  match '/logout' => 'sessions#destroy', :as => 'logout'
+
+  resource :session
+
+  match 'oauth_callback' => 'sessions#oauth_callback', :as => 'oauth_callback'
 end
